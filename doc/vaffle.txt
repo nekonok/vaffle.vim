@@ -118,6 +118,10 @@ version, but not supported.
                 Note: Vaffle uses builtin function |delete()| to delete files,
                 so cannot undo the operation.
 
+*<Plug>(vaffle-fill-cmdline)*
+                Fill the command-line with a list of selected items. Useful 
+                for passing their paths to a shell command.
+
 *<Plug>(vaffle-move-selected)*
                 Move selected items to specified directory.
 
@@ -138,8 +142,14 @@ version, but not supported.
 *<Plug>(vaffle-new-file)*
                 Create a new file in the current directory.
 
+*<Plug>(vaffle-open-home)*
+                Open home directory.
+
 *<Plug>(vaffle-open-parent)*
-                Open parent directory.
+                Open the parent directory.
+
+*<Plug>(vaffle-open-root)*
+                Open the root directory.
 
 *<Plug>(vaffle-quit)*
                 Quit Vaffle and close the buffer.
@@ -155,24 +165,27 @@ version, but not supported.
 3.4. Default Key Mappings                        *vaffle-default-key-mappings*
 
 
-  Mode  {lhs}    {rhs} ~
-  ----  -------  -------------------------------- ~
-  n     h        |<Plug>(vaffle-open-parent)|
-  n     l        |<Plug>(vaffle-open-current)|
-  n     <CR>     |<Plug>(vaffle-open-selected)|
+  Mode  {lhs}     {rhs} ~
+  ----  --------  -------------------------------- ~
+  n     h         |<Plug>(vaffle-open-parent)|
+  n     l         |<Plug>(vaffle-open-current)|
+  n     ~         |<Plug>(vaffle-open-home)|
 
-  n     q        |<Plug>(vaffle-quit)|
-  n     R        |<Plug>(vaffle-refresh)|
-  n     .        |<Plug>(vaffle-toggle-hidden)|
+  n     <CR>      |<Plug>(vaffle-open-selected)|
 
-  nv    <Space>  |<Plug>(vaffle-toggle-current)|
-  n     *        |<Plug>(vaffle-toggle-all)|
+  n     q         |<Plug>(vaffle-quit)|
+  n     R         |<Plug>(vaffle-refresh)|
+  n     .         |<Plug>(vaffle-toggle-hidden)|
 
-  n     o        |<Plug>(vaffle-mkdir)|
-  n     i        |<Plug>(vaffle-new-file)|
-  n     d        |<Plug>(vaffle-delete-selected)|
-  n     m        |<Plug>(vaffle-move-selected)|
-  n     r        |<Plug>(vaffle-rename-selected)|
+  nv    <Space>   |<Plug>(vaffle-toggle-current)|
+  n     *         |<Plug>(vaffle-toggle-all)|
+
+  n     o         |<Plug>(vaffle-mkdir)|
+  n     i         |<Plug>(vaffle-new-file)|
+  n     d         |<Plug>(vaffle-delete-selected)|
+  n     m         |<Plug>(vaffle-move-selected)|
+  n     r         |<Plug>(vaffle-rename-selected)|
+  n     x         |<Plug>(vaffle-fill-cmdline)|
 
 
 ==============================================================================
@@ -210,8 +223,9 @@ Customizing key mappings:                 *vaffle-example-custom-key-mappings*
 >
   function! s:customize_vaffle_mappings() abort
     " Customize key mappings here
-    nmap K <Plug>(vaffle-mkdir)
-    nmap N <Plug>(vaffle-new-file)
+    nmap <Bslash> <Plug>(vaffle-open-root)
+    nmap K        <Plug>(vaffle-mkdir)
+    nmap N        <Plug>(vaffle-new-file)
   endfunction
 
   augroup vimrc_vaffle
